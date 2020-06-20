@@ -1,0 +1,229 @@
+using System; 
+
+using System.Collections.Generic; 
+
+using System.Linq; 
+
+using System.Text; 
+
+using System.Threading.Tasks; 
+
+  
+
+namespace AgendaMat 
+
+{ 
+
+    class Program 
+
+    { 
+
+        static string[,] agenda; 
+
+        static int Contactos = 0; 
+
+        static int Contador = 0; 
+
+  
+
+        static void Main(string[] args) 
+
+        { 
+            
+        Console.WriteLine("Seleccione la opcion que desea elegir:");
+        Console.WriteLine("a.Eliminar contacto");
+        Console.WriteLine("b.Modificar contacto");
+        Console.WriteLine("c.Buscar contacto");
+
+            Contactos = PedirNoContactos();//10 
+
+            agenda = new string[4,Contactos]; 
+
+            Console.WriteLine("\n"); 
+
+            GuardarContacto(); 
+            
+              GuardarContacto(); 
+
+            MostrarContactos(); 
+
+  
+
+            BuscarModificarEliminar('b'); 
+
+            BuscarModificarEliminar('m'); 
+
+            MostrarContactos(); 
+
+            BuscarModificarEliminar('e'); 
+
+            MostrarContactos(); 
+
+  
+
+  
+
+            Console.ReadKey(); 
+
+        } 
+
+  
+
+        static int PedirNoContactos() 
+
+        { 
+
+            Console.Write("¿Cuantos contactos desea agregar?: "); 
+
+            return int.Parse(Console.ReadLine()); 
+
+        } 
+
+  
+
+        static string PedirDatos(string linea) 
+
+        { 
+  string dato = ""; 
+
+            dato = "Ingrese "+linea+" : "; 
+
+            return dato; 
+
+        } 
+
+  
+
+        static void GuardarContacto() 
+
+        { 
+
+            if (Contador < Contactos) 
+
+            { 
+
+                Console.Write(PedirDatos("Nombre:")); 
+
+                agenda[0, Contador] = Console.ReadLine(); 
+
+                Console.Write(PedirDatos("Apellido:")); 
+
+                agenda[1, Contador] = Console.ReadLine(); 
+
+                Console.Write(PedirDatos("Direccion:")); 
+
+                agenda[2, Contador] = Console.ReadLine(); 
+
+                Console.Write(PedirDatos("Telefono:")); 
+
+                agenda[3, Contador] = Console.ReadLine(); 
+
+                Contador++; 
+
+                Console.WriteLine("\n"); 
+
+            } 
+
+            else 
+
+                Console.WriteLine("Agenda llena\n"); 
+
+            } 
+
+        } 
+
+  
+
+        static void MostrarContactos() 
+
+        { 
+
+            for (int f = 0; f < Contador; f++) 
+
+            { 
+
+                Console.WriteLine(agenda[0, f] + "--" + agenda[1, f] + "--" + agenda[2, f] + "--" + agenda[3, f]+"\n"); 
+
+            } 
+
+        } 
+
+        static void BuscarModificarEliminar(char tipo) 
+
+        { 
+
+            string buscar = "";
+             Console.Write("Ingrese el nombre del contacto: ");
+             buscar = Console.ReadLine(); 
+            for (int f = 0; f < Contactos; f++) 
+
+            { 
+
+                if (tipo == 'b') 
+
+                { 
+
+                    if (buscar == agenda[0, f]) 
+
+                    { 
+                    
+                        Console.WriteLine(agenda[0, f] + "--" + agenda[1, f] + "--" + agenda[2, f] + "--" + agenda[3, f]); 
+
+                    } 
+
+                } 
+
+                else if (tipo == 'm') 
+
+                { 
+
+                    if (buscar == agenda[0, f]) 
+
+                    { 
+
+                        Console.Write(PedirDatos("Nombre:")); 
+
+                        agenda[0, f] = Console.ReadLine(); 
+
+                        Console.Write(PedirDatos("Apellido:")); 
+
+                        agenda[1, f] = Console.ReadLine(); 
+
+                        Console.Write(PedirDatos("Direccion:")); 
+
+                        agenda[2, f] = Console.ReadLine(); 
+
+                        Console.Write(PedirDatos("Telefono:")); 
+
+                        agenda[3, f] = Console.ReadLine(); 
+
+                    } 
+
+                } 
+
+                else 
+
+                { 
+
+                    if (buscar == agenda[0, f]) 
+
+                    { 
+
+                        agenda[0, f] = " "; 
+    agenda[1, f] = " "; 
+
+                        agenda[2, f] = " "; 
+
+                        agenda[3, f] = " "; 
+
+                    } 
+
+                } 
+
+            } 
+
+        } 
+
+    } 
+
+} 
